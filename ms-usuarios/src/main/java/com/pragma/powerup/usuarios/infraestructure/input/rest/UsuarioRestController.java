@@ -19,6 +19,7 @@ public class UsuarioRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public void crearPropietario(@Valid @RequestBody UsuarioRequestDto dto,
                                  @RequestHeader("Rol") String rolCreador) {
+        System.out.println("📥 Header Rol recibido: [" + rolCreador + "]");
         usuarioHandler.crearPropietario(dto, rolCreador);
     }
 }

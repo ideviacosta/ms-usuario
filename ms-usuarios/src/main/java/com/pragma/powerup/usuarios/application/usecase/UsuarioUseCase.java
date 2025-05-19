@@ -2,6 +2,7 @@ package com.pragma.powerup.usuarios.application.usecase;
 import com.pragma.powerup.usuarios.domain.api.IUsuarioService;
 import com.pragma.powerup.usuarios.domain.model.Usuario;
 import com.pragma.powerup.usuarios.domain.spi.IUsuarioPersistencePort;
+import com.pragma.powerup.usuarios.infraestructure.exception.handler.UnauthorizedRoleException;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
@@ -14,8 +15,8 @@ public class UsuarioUseCase implements IUsuarioService {
 
     @Override
     public void crearPropietario(Usuario usuario, String rolCreador) {
-        if (!"ADMINISTRADOR".equals(rolCreador)) {
-            throw new RuntimeException("Solo un administrador puede crear propietarios");
+        if (!"ADMINISTRADOR".equalsIgnoreCase(rolCreador.trim())) {
+            throw new UnauthorizedRoleException("Solo un administrador puede crear propietarios");
         }
 
         if (Period.between(LocalDate.parse(usuario.getFechaNacimiento()), LocalDate.now()).getYears() < 18) {

@@ -20,7 +20,7 @@ public class UsuarioEntity {
 
     private String apellido;
 
-    @Column(name = "documento_identidad", unique = true)
+    @Column(name = "numero_documento")
     private String documentoIdentidad;
 
     private String celular;
