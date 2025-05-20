@@ -3,6 +3,7 @@ package com.pragma.powerup.usuarios.infraestructure.input.rest;
 import com.pragma.powerup.usuarios.application.handler.IUsuarioHandler;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioRequestDto;
 
+import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,10 @@ public class UsuarioRestController {
                                  @RequestHeader("Rol") String rolCreador) {
         System.out.println("📥 Header Rol recibido: [" + rolCreador + "]");
         usuarioHandler.crearPropietario(dto, rolCreador);
+    }
+
+    @GetMapping("/{id}")
+    public UsuarioResponseDto obtenerUsuarioPorId(@PathVariable Long id) {
+        return usuarioHandler.obtenerPorId(id);
     }
 }

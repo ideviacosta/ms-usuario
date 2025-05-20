@@ -30,4 +30,9 @@ public class UsuarioUseCase implements IUsuarioService {
         usuario.setRol("PROPIETARIO");
         persistencePort.guardarUsuario(usuario);
     }
+
+    @Override
+    public Usuario obtenerPorId(Long id) {
+        return persistencePort.obtenerPorId(id);
+    }
 }
