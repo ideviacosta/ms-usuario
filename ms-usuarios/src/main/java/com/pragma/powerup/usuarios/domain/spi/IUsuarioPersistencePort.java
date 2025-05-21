@@ -6,5 +6,6 @@ public interface IUsuarioPersistencePort {
     boolean existeCorreo(String correo);
     void guardarUsuario(Usuario usuario);
     Usuario obtenerPorId(Long id);
+    Usuario obtenerPorCorreo(String correo);
 
 }

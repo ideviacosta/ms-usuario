@@ -16,4 +16,5 @@ spring:
         format_sql: true
 
 jwt:
-  secret: clave-secreta-super-segura
+  secret: ${JWT_SECRET:clave-super-secreta-de-al-menos-32-caracteres}
+

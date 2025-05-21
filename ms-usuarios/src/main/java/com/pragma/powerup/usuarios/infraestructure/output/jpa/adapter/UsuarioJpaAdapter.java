@@ -35,4 +35,11 @@ public class UsuarioJpaAdapter implements IUsuarioPersistencePort {
                 .map(UsuarioEntityMapper::toModel)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
+
+    @Override
+    public Usuario obtenerPorCorreo(String correo) {
+        UsuarioEntity entity = usuarioRepository.findByCorreo(correo).orElse(null);
+        return entity != null ? UsuarioEntityMapper.toModel(entity) : null;
+    }
+
 }

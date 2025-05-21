@@ -2,6 +2,7 @@ package com.pragma.powerup.usuarios.application.handler;
 
 import com.pragma.powerup.usuarios.domain.api.IUsuarioService;
 import com.pragma.powerup.usuarios.domain.model.Usuario;
+import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioLoginResponseDto;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioRequestDto;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioResponseDto;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.mapper.UsuarioRequestMapper;
@@ -20,6 +21,19 @@ public class UsuarioHandler implements IUsuarioHandler {
         Usuario usuario = UsuarioRequestMapper.toModel(dto);
         usuarioService.crearPropietario(usuario, rolCreador);
     }
+
+    @Override
+    public void crearEmpleado(UsuarioRequestDto dto, String rolCreador) {
+        Usuario usuario = UsuarioRequestMapper.toModel(dto);
+        usuarioService.crearEmpleado(usuario, rolCreador);
+    }
+
+    @Override
+    public UsuarioLoginResponseDto login(String correo, String clave) {
+        Usuario usuario = usuarioService.login(correo, clave);
+        return new UsuarioLoginResponseDto(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), usuario.getRol());
+    }
+
 
     @Override
     public UsuarioResponseDto obtenerPorId(Long id) {
