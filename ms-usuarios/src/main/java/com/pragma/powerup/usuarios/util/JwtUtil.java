@@ -1,4 +1,4 @@
-package com.pragma.powerup.usuarios.domain.util;
+package com.pragma.powerup.usuarios.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

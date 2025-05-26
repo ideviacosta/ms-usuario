@@ -11,5 +11,4 @@ public class UsuarioLoginResponseDto {
     private String apellido;
     private String correo;
     private String rol;
-    private String token;
 }

@@ -3,7 +3,7 @@ package com.pragma.powerup.usuarios.infraestructure.config;
 import com.pragma.powerup.usuarios.application.usecase.UsuarioUseCase;
 import com.pragma.powerup.usuarios.domain.api.IUsuarioService;
 import com.pragma.powerup.usuarios.domain.spi.IUsuarioPersistencePort;
-import com.pragma.powerup.usuarios.domain.util.JwtUtil;
+import com.pragma.powerup.usuarios.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

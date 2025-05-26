@@ -1,10 +1,14 @@
 package com.pragma.powerup.usuarios.application.usecase;
 import com.pragma.powerup.usuarios.domain.api.IUsuarioService;
+import com.pragma.powerup.usuarios.domain.exception.CredencialesInvalidasException;
+import com.pragma.powerup.usuarios.domain.exception.UsuarioMenorEdadException;
+import com.pragma.powerup.usuarios.domain.exception.UsuarioYaExisteException;
 import com.pragma.powerup.usuarios.domain.model.Usuario;
 import com.pragma.powerup.usuarios.domain.spi.IUsuarioPersistencePort;
-import com.pragma.powerup.usuarios.infraestructure.exception.handler.UnauthorizedRoleException;
 import lombok.RequiredArgsConstructor;
-import static com.pragma.powerup.usuarios.domain.util.RolValidator.validarRol;
+
+import static com.pragma.powerup.usuarios.util.MensajesError.*;
+import static com.pragma.powerup.usuarios.util.RolValidator.validarRol;
 
 
 import java.time.LocalDate;
@@ -19,12 +23,12 @@ public class UsuarioUseCase implements IUsuarioService {
     public void crearPropietario(Usuario usuario, String rolCreador) {
         validarRol(rolCreador, "ADMINISTRADOR");
 
-        if (Period.between(LocalDate.parse(usuario.getFechaNacimiento()), LocalDate.now()).getYears() < 18) {
-            throw new RuntimeException("El usuario debe ser mayor de edad");
+        if (esMenorDeEdad(usuario.getFechaNacimiento())) {
+            throw new UsuarioMenorEdadException(USUARIO_MENOR_EDAD);
         }
 
         if (persistencePort.existeCorreo(usuario.getCorreo())) {
-            throw new RuntimeException("El correo ya está registrado");
+            throw new UsuarioYaExisteException(CORREO_YA_REGISTRADO);
         }
 
         usuario.setRol("PROPIETARIO");
@@ -35,12 +39,12 @@ public class UsuarioUseCase implements IUsuarioService {
     public void crearEmpleado(Usuario usuario, String rolCreador) {
         validarRol(rolCreador, "PROPIETARIO");
 
-        if (Period.between(LocalDate.parse(usuario.getFechaNacimiento()), LocalDate.now()).getYears() < 18) {
-            throw new RuntimeException("El usuario debe ser mayor de edad");
+        if (esMenorDeEdad(usuario.getFechaNacimiento())) {
+            throw new UsuarioMenorEdadException(USUARIO_MENOR_EDAD);
         }
 
         if (persistencePort.existeCorreo(usuario.getCorreo())) {
-            throw new RuntimeException("El correo ya está registrado");
+            throw new UsuarioYaExisteException(CORREO_YA_REGISTRADO);
         }
 
         usuario.setRol("EMPLEADO");
@@ -51,7 +55,7 @@ public class UsuarioUseCase implements IUsuarioService {
     public Usuario login(String correo, String clave) {
         Usuario usuario = persistencePort.obtenerPorCorreo(correo);
         if (usuario == null || !usuario.getClave().equals(clave)) {
-            throw new RuntimeException("Credenciales inválidas");
+            throw new CredencialesInvalidasException(CREDENCIALES_INVALIDAS);
         }
         return usuario;
     }
@@ -59,5 +63,9 @@ public class UsuarioUseCase implements IUsuarioService {
     @Override
     public Usuario obtenerPorId(Long id) {
         return persistencePort.obtenerPorId(id);
+    }
+
+    private boolean esMenorDeEdad(String fechaNacimiento) {
+        return Period.between(LocalDate.parse(fechaNacimiento), LocalDate.now()).getYears() < 18;
     }
 }

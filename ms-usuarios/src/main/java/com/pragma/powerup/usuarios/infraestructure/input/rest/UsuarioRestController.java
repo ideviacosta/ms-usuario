@@ -1,9 +1,7 @@
 package com.pragma.powerup.usuarios.infraestructure.input.rest;
 
 import com.pragma.powerup.usuarios.application.handler.IUsuarioHandler;
-import com.pragma.powerup.usuarios.domain.model.Usuario;
-import com.pragma.powerup.usuarios.domain.util.JwtUtil;
-import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioLoginRequestDto;
+import com.pragma.powerup.usuarios.util.JwtUtil;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioLoginResponseDto;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioRequestDto;
 
