@@ -36,7 +36,7 @@ public class UsuarioRestController {
     public void crearPropietario(@Valid @RequestBody UsuarioRequestDto dto,
                                  HttpServletRequest request) {
         String rolCreador = (String) request.getAttribute("rolUsuario");
-        usuarioHandler.crearEmpleado(dto, rolCreador);
+        usuarioHandler.crearPropietario(dto, rolCreador);
     }
 
     @Operation(summary = "Obtener usuario by Id")

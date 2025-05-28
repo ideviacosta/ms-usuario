@@ -12,7 +12,8 @@ public class SecurityConfig {
     public FilterRegistrationBean<JwtFilter> jwtFilter(JwtUtil jwtUtil) {
         FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JwtFilter(jwtUtil));
-        registrationBean.addUrlPatterns("/usuarios/*"); // Aplica solo a endpoints protegidos
+        registrationBean.addUrlPatterns("/usuarios/propietario",
+                                        "/usuarios/empleado"); // Aplica solo a endpoints protegidos
         return registrationBean;
     }
 }
