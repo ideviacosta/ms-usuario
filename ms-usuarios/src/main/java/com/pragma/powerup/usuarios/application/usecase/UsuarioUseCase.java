@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import static com.pragma.powerup.usuarios.util.MensajesError.*;
 import static com.pragma.powerup.usuarios.util.RolValidator.validarRol;
-
+import static com.pragma.powerup.usuarios.util.Roles.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -21,7 +21,7 @@ public class UsuarioUseCase implements IUsuarioService {
 
     @Override
     public void crearPropietario(Usuario usuario, String rolCreador) {
-        validarRol(rolCreador, "ADMINISTRADOR");
+        validarRol(rolCreador, ADMINISTRADOR);
 
         if (esMenorDeEdad(usuario.getFechaNacimiento())) {
             throw new UsuarioMenorEdadException(USUARIO_MENOR_EDAD);
@@ -31,13 +31,13 @@ public class UsuarioUseCase implements IUsuarioService {
             throw new UsuarioYaExisteException(CORREO_YA_REGISTRADO);
         }
 
-        usuario.setRol("PROPIETARIO");
+        usuario.setRol(PROPIETARIO);
         persistencePort.guardarUsuario(usuario);
     }
 
     @Override
     public void crearEmpleado(Usuario usuario, String rolCreador) {
-        validarRol(rolCreador, "PROPIETARIO");
+        validarRol(rolCreador, PROPIETARIO);
 
         if (esMenorDeEdad(usuario.getFechaNacimiento())) {
             throw new UsuarioMenorEdadException(USUARIO_MENOR_EDAD);
@@ -47,7 +47,7 @@ public class UsuarioUseCase implements IUsuarioService {
             throw new UsuarioYaExisteException(CORREO_YA_REGISTRADO);
         }
 
-        usuario.setRol("EMPLEADO");
+        usuario.setRol(EMPLEADO);
         persistencePort.guardarUsuario(usuario);
     }
 
