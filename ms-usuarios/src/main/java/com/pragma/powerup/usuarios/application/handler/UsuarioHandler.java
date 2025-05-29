@@ -46,4 +46,11 @@ public class UsuarioHandler implements IUsuarioHandler {
         dto.setRol(usuario.getRol());
         return dto;
     }
+
+    @Override
+    public void crearCliente(UsuarioRequestDto dto, String rolCreador) {
+        Usuario usuario = UsuarioRequestMapper.toModel(dto);
+        usuarioService.crearCliente(usuario, rolCreador);
+    }
+
 }

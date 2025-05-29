@@ -7,6 +7,6 @@ public interface IUsuarioService {
     Usuario obtenerPorId(Long id);
     void crearEmpleado(Usuario usuario, String rolCreador);
     Usuario login(String correo, String clave);
-
+    void crearCliente(Usuario usuario, String rolCreador);
 
 }

@@ -75,4 +75,17 @@ public class UsuarioRestController {
         return jwtUtil.generarToken(usuario.getId(), usuario.getRol());
     }
 
+    @Operation(summary = "Crear Cliente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cuenta creada exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Correo no válido")
+    })
+    @PostMapping("/cliente")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void crearCliente(@Valid @RequestBody UsuarioRequestDto dto, HttpServletRequest request) {
+        String rolCreador = (String) request.getAttribute("rolUsuario");
+        usuarioHandler.crearCliente(dto, rolCreador);
+    }
+
+
 }

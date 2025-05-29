@@ -9,5 +9,6 @@ public interface IUsuarioHandler {
     UsuarioResponseDto obtenerPorId(Long id);
     void crearEmpleado(UsuarioRequestDto dto, String rolCreador);
     UsuarioLoginResponseDto login(String correo, String clave);
+    void crearCliente(UsuarioRequestDto dto, String rolCreador);
 
 }

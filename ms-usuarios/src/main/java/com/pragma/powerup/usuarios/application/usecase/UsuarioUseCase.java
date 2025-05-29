@@ -68,4 +68,20 @@ public class UsuarioUseCase implements IUsuarioService {
     private boolean esMenorDeEdad(String fechaNacimiento) {
         return Period.between(LocalDate.parse(fechaNacimiento), LocalDate.now()).getYears() < 18;
     }
+
+    @Override
+    public void crearCliente(Usuario usuario, String rolCreador) {
+        validarRol(rolCreador, CLIENTE);
+        if (esMenorDeEdad(usuario.getFechaNacimiento())) {
+            throw new UsuarioMenorEdadException(USUARIO_MENOR_EDAD);
+        }
+
+        if (persistencePort.existeCorreo(usuario.getCorreo())) {
+            throw new UsuarioYaExisteException(CORREO_YA_REGISTRADO);
+        }
+
+        usuario.setRol(CLIENTE);
+        persistencePort.guardarUsuario(usuario);
+    }
+
 }
