@@ -19,7 +19,7 @@ public class UsuarioEntityMapper {
     }
 
     public static Usuario toModel(UsuarioEntity entity) {
-        Usuario usuario = new Usuario();
+        Usuario usuario = Usuario.builder().build();
         usuario.setId(entity.getId());
         usuario.setNombre(entity.getNombre());
         usuario.setApellido(entity.getApellido());

@@ -5,7 +5,7 @@ import com.pragma.powerup.usuarios.domain.exception.UsuarioMenorEdadException;
 import com.pragma.powerup.usuarios.domain.exception.UsuarioYaExisteException;
 import com.pragma.powerup.usuarios.domain.model.Usuario;
 import com.pragma.powerup.usuarios.domain.spi.IUsuarioPersistencePort;
-import lombok.RequiredArgsConstructor;
+
 
 import static com.pragma.powerup.usuarios.util.MensajesError.*;
 import static com.pragma.powerup.usuarios.util.RolValidator.validarRol;
@@ -14,10 +14,13 @@ import static com.pragma.powerup.usuarios.util.Roles.*;
 import java.time.LocalDate;
 import java.time.Period;
 
-@RequiredArgsConstructor
 public class UsuarioUseCase implements IUsuarioService {
 
     private final IUsuarioPersistencePort persistencePort;
+
+    public UsuarioUseCase(IUsuarioPersistencePort persistencePort) {
+        this.persistencePort = persistencePort;
+    }
 
     @Override
     public void crearPropietario(Usuario usuario, String rolCreador) {

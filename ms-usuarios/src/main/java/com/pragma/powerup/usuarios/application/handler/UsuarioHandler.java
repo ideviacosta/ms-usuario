@@ -6,15 +6,16 @@ import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioLoginRe
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioRequestDto;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioResponseDto;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.mapper.UsuarioRequestMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UsuarioHandler implements IUsuarioHandler {
 
     private final IUsuarioService usuarioService;
+
+    public UsuarioHandler(IUsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     @Override
     public void crearPropietario(UsuarioRequestDto dto, String rolCreador) {

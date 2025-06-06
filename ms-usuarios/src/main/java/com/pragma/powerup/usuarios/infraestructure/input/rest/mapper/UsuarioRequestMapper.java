@@ -3,9 +3,11 @@ package com.pragma.powerup.usuarios.infraestructure.input.rest.mapper;
 import com.pragma.powerup.usuarios.domain.model.Usuario;
 import com.pragma.powerup.usuarios.infraestructure.input.rest.dto.UsuarioRequestDto;
 
+
+
 public class UsuarioRequestMapper {
     public static Usuario toModel(UsuarioRequestDto dto) {
-        Usuario usuario = new Usuario();
+        Usuario usuario = Usuario.builder().build();
         usuario.setNombre(dto.getNombre());
         usuario.setApellido(dto.getApellido());
         usuario.setDocumentoIdentidad(dto.getDocumentoIdentidad());
@@ -14,5 +16,7 @@ public class UsuarioRequestMapper {
         usuario.setClave(dto.getClave());
         usuario.setFechaNacimiento(dto.getFechaNacimiento());
         return usuario;
+    }
+    private UsuarioRequestMapper() {
     }
 }

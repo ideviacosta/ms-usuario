@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
+import static com.pragma.powerup.usuarios.util.MensajesError.*;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -24,12 +24,12 @@ public class GlobalExceptionHandler {
         ex.getBindingResult().getFieldErrors()
                 .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
 
-        return buildResponse(HttpStatus.BAD_REQUEST, "Error de validación", errors);
+        return buildResponse(HttpStatus.BAD_REQUEST, ERROR_DE_VALIDACION, errors);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraint(ConstraintViolationException ex) {
-        return buildResponse(HttpStatus.BAD_REQUEST, "Datos inválidos: " + ex.getMessage());
+        return buildResponse(HttpStatus.BAD_REQUEST, DATOS_INVALIDOS + ex.getMessage());
     }
 
     private ResponseEntity<Object> buildResponse(HttpStatus status, String message) {

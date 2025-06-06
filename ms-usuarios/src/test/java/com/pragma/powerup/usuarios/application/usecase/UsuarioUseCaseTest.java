@@ -75,7 +75,7 @@ class UsuarioUseCaseTest {
     }
 
     private Usuario crearUsuarioValido() {
-        Usuario usuario = new Usuario();
+        Usuario usuario = Usuario.builder().build();
         usuario.setNombre("Juan");
         usuario.setApellido("Pérez");
         usuario.setCorreo("juan@example.com");
@@ -84,7 +84,7 @@ class UsuarioUseCaseTest {
         return usuario;
     }
     private Usuario buildUsuario(String fechaNacimiento) {
-        Usuario usuario = new Usuario();
+        Usuario usuario = Usuario.builder().build();
         usuario.setNombre("Test");
         usuario.setApellido("User");
         usuario.setCorreo("test@correo.com");
