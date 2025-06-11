@@ -83,8 +83,7 @@ public class UsuarioRestController {
     @PostMapping("/cliente")
     @ResponseStatus(HttpStatus.CREATED)
     public void crearCliente(@Valid @RequestBody UsuarioRequestDto dto, HttpServletRequest request) {
-        String rolCreador = (String) request.getAttribute("rolUsuario");
-        usuarioHandler.crearCliente(dto, rolCreador);
+                usuarioHandler.crearCliente(dto);
     }
 
 

@@ -49,9 +49,9 @@ public class UsuarioHandler implements IUsuarioHandler {
     }
 
     @Override
-    public void crearCliente(UsuarioRequestDto dto, String rolCreador) {
+    public void crearCliente(UsuarioRequestDto dto) {
         Usuario usuario = UsuarioRequestMapper.toModel(dto);
-        usuarioService.crearCliente(usuario, rolCreador);
+        usuarioService.crearCliente(usuario);
     }
 
 }

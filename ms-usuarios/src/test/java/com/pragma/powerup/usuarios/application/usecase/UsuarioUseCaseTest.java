@@ -115,7 +115,7 @@ class UsuarioUseCaseTest {
 
         when(persistencePort.existeCorreo(cliente.getCorreo())).thenReturn(false);
 
-        useCase.crearCliente(cliente, rolCreador);
+        useCase.crearCliente(cliente);
 
         assertEquals(CLIENTE, cliente.getRol());
         verify(persistencePort).guardarUsuario(cliente);
@@ -188,7 +188,7 @@ class UsuarioUseCaseTest {
 
         // Act & Assert
         assertThrows(UsuarioMenorEdadException.class, () ->
-                useCase.crearCliente(usuario, CLIENTE));
+                useCase.crearCliente(usuario));
     }
 
     @Test
@@ -199,7 +199,7 @@ class UsuarioUseCaseTest {
 
         // Act & Assert
         assertThrows(UsuarioYaExisteException.class, () ->
-                useCase.crearCliente(usuario, CLIENTE));
+                useCase.crearCliente(usuario));
     }
 
 

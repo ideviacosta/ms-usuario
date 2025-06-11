@@ -73,8 +73,7 @@ public class UsuarioUseCase implements IUsuarioService {
     }
 
     @Override
-    public void crearCliente(Usuario usuario, String rolCreador) {
-        validarRol(rolCreador, CLIENTE);
+    public void crearCliente(Usuario usuario) {
         if (esMenorDeEdad(usuario.getFechaNacimiento())) {
             throw new UsuarioMenorEdadException(USUARIO_MENOR_EDAD);
         }
